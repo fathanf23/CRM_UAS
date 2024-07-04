@@ -97,6 +97,7 @@ class TransaksiController extends Controller
     }elseif ($pelanggan->kartu->kode == 'STD'){
         $diskon = 0;
     }
+    
     // Hitung harga_total
     $harga_total = $harga * $request->input('qty');
     $harga_diskon = $harga * $request->input('qty') - $diskon;

@@ -124,16 +124,11 @@ class TransaksiController extends Controller
      */
     public function delete($id)
 {
-    // Cari transaksi berdasarkan ID
     $transaksi = Transaksi::find($id);
 
     if ($transaksi) {
-        // Hapus semua detail transaksi yang terkait
         DetailTransaksi::where('transaksi_id', $transaksi->id)->delete();
-        
-        // Hapus transaksi
         $transaksi->delete();
-        
         return redirect('admin/transaksi/index');
 }
 
