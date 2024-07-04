@@ -29,26 +29,27 @@ class ShopController extends Controller
      * Show the form for creating a new resource.
      */
     public function addToCart($id)
-    {
-        $produk = Produk::findOrFail($id);
-        $cart = session()->get('cart', []);
+{
+    $produk = Produk::findOrFail($id);
+    $cart = session()->get('cart', []);
 
-        if (isset($cart[$id])) {
-            $cart[$id]['qty']++;
-            $cart[$id]['harga_total'] += $produk->harga_produk;
-        } else {
-            $cart[$id] = [
-                "nama_produk" => $produk->nm_produk,
-                "qty" => 1,
-                "harga_produk" => $produk->harga_produk,
-                "harga_total" => $produk->harga_produk,
-                "foto" => $produk->foto
-            ];
-        }
-
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    if (isset($cart[$id])) {
+        $cart[$id]['qty']++;
+        $cart[$id]['harga_total'] += $produk->harga_produk;
+    } else {
+        $cart[$id] = [
+            "nama_produk" => $produk->nm_produk,
+            "qty" => 1,
+            "harga_produk" => $produk->harga_produk,
+            "harga_total" => $produk->harga_produk,
+            "foto" => $produk->foto
+        ];
     }
+
+    session()->put('cart', $cart);
+    return redirect()->back()->with('success', 'Produk Berhasil Ditambahkan!');
+}
+
     public function cart(Request $request)
 {
     $produk = Produk::get();
@@ -56,7 +57,7 @@ class ShopController extends Controller
     $cart = session()->get('cart', []);
     // dd($cart);
     if(empty($cart))
-    {
+    {   
         return redirect('/');
     }
     $total = 0;
@@ -87,13 +88,9 @@ class ShopController extends Controller
         $total += $item['harga_total'];
     }
     $total -= $diskon;
-        // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
         
         $params = array(
@@ -157,10 +154,17 @@ public function success()
      */
     
 
-    public function update(Request $request)
+    public function updateCart(Request $request)
 {
-    
+    if($request->operation == 'increment') {
+        session()->increment('cart.' . $request->id . '.qty');
+    } elseif($request->operation == 'decrement' && session('cart.' . $request->id . '.qty') > 1) {
+        session()->decrement('cart.' . $request->id . '.qty');
+    }
+
+    return redirect()->back();
 }
+
 
 
     /**

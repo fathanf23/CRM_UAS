@@ -30,6 +30,7 @@
             @enderror
         </div>
     </div>
+    
     <div class="form-group row">
         <label for="text" class="col-4 col-form-label">Nama Kartu</label>
         <div class="col-8">

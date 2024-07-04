@@ -1,101 +1,70 @@
-@extends('front.app')
-@section('front')
-        <div class="container py-5 h-100">
-            <div class="row d-flex align-items-center justify-content-center">
-                <div class="col-md-8 col-lg-7 col-xl-6">
-                    <img src="/frontend/images/susumooo.png"
-                        class="img-fluid" alt="Phone image">
-                </div>
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 card shadow p-4 bg-dark">
-                    <h1 align="center" class="mb-3">Buat Akun</h1>
-                    <form action="{{ url('auth/registrasi/store') }}" method="POST">
-                        @csrf
-
-                        <!-- Nama input -->
-                        <label class="form-label" for="nama">Nama</label>
-                        <div class="form-outline mb-4">
-                            <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror"
-                                name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus>
-
-                            @error('nama')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+@extends('front.apps')
+@section('fronts')
+<br>
+<br>
+<br>
+<br>
+<br>
+<body>
+<div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main class="registrasi">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header bg-primary"><h3 class="text-center text-white font-weight-light my-3 display-6">Buat Akun</h3></div>
+                                    <div class="card-body">
+                                    <form action="{{ url('auth/registrasi/store') }}" method="POST">
+                                            @csrf
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="nama" name="nama" type="text" placeholder="Nama Anda" />
+                                                        <label for="nama">Nama</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input class="form-control" id="alamat" name="alamat" type="text" placeholder="Alamat Anda" />
+                                                        <label for="alamat">Alamat</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="no_hp" name="no_hp" type="text" placeholder="Nomor Hp Anda" />
+                                                <label for="no_hp">No Telepon</label>
+                                            </div>
+                                            <hr>
+                                            <p>*Username & Password akan digunakan untuk Login</p>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="username" name="username" type="text" placeholder="Buat Username Anda" />
+                                                        <label for="username">Username</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputPassword" name="password" type="password" placeholder="Create a password" />
+                                                        <label for="inputPassword">Password</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center mt-4 mb-0">
+                                                <button type="submit" class="btn btn-primary btn-lg text-white">Buat Akun</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class="small">Anda Punya Akun? <a href="{{url('login')}}"> Ayo Login!</a></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <label class="form-label" for="alamat">Alamat</label>
-                        <div class="form-outline mb-4">
-                            <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror"
-                                name="alamat" value="{{ old('alamat') }}" required autocomplete="alamat" autofocus>
-
-                            @error('alamat')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <label class="form-label" for="no_hp">Nomor HP</label>
-                        <div class="form-outline mb-4">
-                            <input id="no_hp" type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                name="no_hp" value="{{ old('no_hp') }}" required autocomplete="no_hp" autofocus>
-
-                            @error('no_hp')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <!-- Nama input -->
-                        <label class="form-label" for="username">Username</label>
-                        <div class="form-outline mb-4">
-                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
-                                name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                            @error('username')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <!-- Password input -->
-                        <label class="form-label" for="form1Example23">Password</label>
-                        <div class="form-outline mb-4">
-                            <input id="password" type="password"
-                                class="form-control @error('password') is-invalid @enderror" name="password" required
-                                autocomplete="current-password">
-
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <!-- Password input -->
-                        <label class="form-label" for="password_confirmation">Konfirmasi Kata Sandi</label>
-                        <div class="form-outline mb-4">
-                            <input id="password_confirmation" type="password"
-                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                name="password_confirmation" required autocomplete="current-password_confirmation">
-
-                            @error('password_confirmation')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="row">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Buat Akun</button>
-                        </div>
-                        <div class="row text-center mt-4">
-                            <span>Sudah punya akun?</span>
-                            <a href="{{ route('login') }}">Masuk</a>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </main>
             </div>
         </div>
+        </body>
 @endsection

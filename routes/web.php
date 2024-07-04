@@ -31,17 +31,18 @@ use App\Http\Controllers\RegistrasiController;
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('auth/registrasi', [RegistrasiController::class, 'index'])->name('registrasi');
+Route::get('/registrasi', [RegistrasiController::class, 'index'])->name('registrasi');
 Route::post('auth/registrasi/store', [RegistrasiController::class, 'store']);
 
 
 Route::get('/', [BerandaController::class, 'index'])->name('home');
-Route::get('/vendor/saran', [SaranController::class, 'index']);
+Route::get('/saran', [SaranController::class, 'index']);
 Route::get('/vendor/saran', [SaranController::class, 'create']);
 Route::post('/vendor/saran/store', [SaranController::class, 'store']);
-Route::get('/carts', [ShopController::class, 'cart'])->name('cart');
+Route::get('/carts', [ShopController::class, 'cart'])->name('cart')->middleware('auth');
 Route::get('add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('add.to.cart');
 Route::delete('remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
+
 Route::get('success', [ShopController::class, 'success']);
 
 
@@ -63,7 +64,7 @@ Route::get('success', [ShopController::class, 'success']);
         Route::get('/admin/kartu/index', [KartuController::class, 'index']);
         Route::get('/admin/kartu/create', [KartuController::class, 'create']);
         Route::post('/admin/kartu/store', [KartuController::class, 'store']);
-    Route::get('/admin/kartu/delete/{id}', [KartuController::class, 'delete']);
+    Route::get('/admin/kartu/delete/{id}', [KartuController::class, 'destroy']);
     Route::get('/admin/kartu/edit/{id}', [KartuController::class, 'edit']);
     Route::post('/admin/kartu/update/{id}', [KartuController::class, 'update']);
 

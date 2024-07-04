@@ -84,7 +84,8 @@ class KartuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kartu = DB::table('kartu')->where('id', $id)->delete();
+        return redirect('admin/kartu/index');
     }
 
 }

@@ -12,7 +12,6 @@ class SaranController extends Controller
      */
     public function index()
     {
-        $saran = Saran::get()->all();
         return view('vendor.saran');
     }
 
@@ -30,7 +29,6 @@ class SaranController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'saran' => 'required|min:10',
             'bintang' => 'required'
         ],[
             'nama.required' => "Nama harus diisi",

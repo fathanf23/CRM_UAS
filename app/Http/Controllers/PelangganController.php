@@ -54,12 +54,25 @@ class PelangganController extends Controller
         ]);
         return redirect('admin/pelanggan/index')->with('success', 'Berhasil Menambahkan Data');
     }
-    public function delete($id)
-    {
-        $pelanggan = Pelanggan::where('id', $id)->first();
-        $pelanggan->delete();
-        return redirect('admin/pelanggan/index');
-    }
+    // App\Http\Controllers\PelangganController.php
+
+public function delete($id)
+{
+    // Find the pelanggan by id
+    $pelanggan = Pelanggan::findOrFail($id);
+
+    // Retrieve the associated user_id
+    $user_id = $pelanggan->user_id;
+
+    // Delete the pelanggan
+    $pelanggan->delete();
+
+    // Delete the associated user
+    User::findOrFail($user_id)->delete();
+
+    return redirect('admin/pelanggan/index')->with('success', 'Berhasil Menghapus Data Pelanggan dan User Terkait');
+}
+
     public function edit(string $id)
     {
         //

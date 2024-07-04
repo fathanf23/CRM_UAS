@@ -14,9 +14,7 @@ class RegistrasiController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        $pelanggan = Pelanggan::all();
-        return view('auth.registrasi', compact('user', 'pelanggan'));
+        return view('auth.registrasi');
     }
 
     /**
@@ -48,7 +46,7 @@ class RegistrasiController extends Controller
             'user_id' => $user->id,
             'nama' => $request->input('nama'),
             'alamat' => $request->input('alamat'),
-            'no_hp' => $request->input('alamat'),
+            'no_hp' => $request->input('no_hp'),
             'kartu_id' => 4,
         ]);
 

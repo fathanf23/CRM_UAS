@@ -25,19 +25,17 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($data)) {
-            // Get the authenticated user
             $user = Auth::user();
 
-            // Redirect based on user role
             if ($user->role == 'admin') {
                 return redirect()->route('admin');
             } elseif ($user->role == 'pelanggan') {
                 return redirect()->route('home');
             } else {
-                return redirect('/'); // Default fallback if role doesn't match
+                return redirect('/'); 
             }
         } else {
-            return redirect()->route('login')->with('failed', 'Username atau Password salah');
+            return redirect()->route('login')->with('failed', 'Username atau Password Salah!');
         }
     }
     

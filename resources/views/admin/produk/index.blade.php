@@ -59,7 +59,12 @@
                 <td>{{$p->kd_produk}}</td>
                 <td>{{$p->nm_produk}}</td>
                 <td>{{$p->harga_produk}}</td>
-                <td>{{$p->foto}}</td>
+                <td>
+                @empty($p->foto)
+                <img src="{{ asset('fronts/img/nofoto.png') }}" class="img-fluid w-100 rounded-top" alt="">
+                @else
+                <img src="{{ asset('fronts/img') }}/{{$p->foto}}" class="img-fluid w-100 rounded-top" alt="">
+                @endempty</td>
                 <td>
                 <a href="{{ url('admin/produk/delete/' . $p->id) }}" class="btn btn-md btn-danger px-2" data-bs-toggle="modal" data-bs-target="#exampleModal{{$p->id}}">
                                 <i class="fa-solid fa-trash"> Delete</i>

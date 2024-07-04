@@ -35,7 +35,7 @@ class CheckoutController extends Controller
                 ),
             );
             $snapToken = \Midtrans\Snap::getSnapToken($params);
-            dd($snapToken);
+            // dd($snapToken);
             return view('/cart', compact('snapToken', 'transaksi'));
         }
         
