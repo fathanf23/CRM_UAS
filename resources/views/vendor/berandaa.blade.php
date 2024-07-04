@@ -5,8 +5,10 @@
     <div class="container py-5">
         <div class="row g-5 align-items-center">
             <div class="col-md-12 col-lg-7">
-                <h1 class="mb-5 display-3 text-white">Susu Mooo!</h1>
-                <h4 class="mb-3 text-warning">100% Susu Murni Asli!</h4>
+                <h1 class="mb-3 display-3 text-white">Susu Mooo!</h1>
+                <h4 class="mb-3 text-warning"><i class="fas fa-check"></i> 100% Susu Murni Asli!</h4>
+                <h4 class="mb-3 text-warning"><i class="fas fa-check"></i> Tidak Mengandung Bahan Pengawet!</h4>
+                <h4 class="mb-3 text-warning"><i class="fas fa-check"></i> Terima Pesan Antar Min. Jarak 3Km Radius Kota Kuningan!</h4>
                 <p class="text-white">Nikmati kesegaran dan kelezatan dari Susu Mooo, susu segar berkualitas tinggi
                     dengan pilihan rasa yang menggugah selera. Kami menghadirkan berbagai varian rasa yang siap
                     memanjakan lidah Anda dan memberikan pengalaman minum susu yang tak terlupakan.</p>
@@ -39,11 +41,12 @@
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; left: 10px;">Susu</div>
                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>{{$p->nm_produk}}</h4>
+                            <h4 class="fw-bold">{{$p->nm_produk}}</h4>
                             <p></p>
                             <div class="d-flex justify-content-between flex-lg-wrap align-items-center">
-                                <p class="text-dark fs-5 fw-bold mb-0 text-center flex-grow-1">Rp.
-                                    {{ number_format($p->harga_produk, 0, ',', '.') }}</p>
+                            <span class="text-decoration-line-through text-danger flex-grow-1">Rp. 15.000</span>
+                                <p class="text-dark fs-2 fw-bold mb-0 text-center flex-grow-1">
+                                    Rp.{{ number_format($p->harga_produk, 0, ',', '.') }}</p>
                                 <hr>
                                 <a href="{{ route('add.to.cart', $p->id) }}"
                                     class="btn btn-warning rounded-pill px-3 text-white">
@@ -88,7 +91,7 @@
                                 cash? tenang! Kami sudah siapkan banyak sekali metode pembayaran seperti Qris, Transfer
                                 Bank, E-Wallet dll. Jadi tidak ada alasan untuk Anda membeli Produk Kami!
                             </p>
-                            <h1 class="display-10 mb-4">"SAYANGI TULANG MU, MINUM SUSUMOOO TIAP HARI! ANJAY!"</h1>
+                            <h1 class="display-10 fw-bold mb-4">"Nikmati Murninya Susu dengan Susu Mooo!"</h1>
                         </div>
                     </div>
                 </div>
@@ -191,6 +194,4 @@
         });
     </script>
 @endif
-
-        
         @endsection
