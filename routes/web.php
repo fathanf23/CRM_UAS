@@ -28,25 +28,31 @@ use App\Http\Controllers\RegistrasiController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Routing LoginRegister
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/registrasi', [RegistrasiController::class, 'index'])->name('registrasi');
 Route::post('auth/registrasi/store', [RegistrasiController::class, 'store']);
 
-
+// Routing ke Frontend
 Route::get('/', [BerandaController::class, 'index'])->name('home');
+
+// Routing untuk memberikan saran dan masukan
 Route::get('/saran', [SaranController::class, 'index']);
 Route::get('/vendor/saran', [SaranController::class, 'create']);
 Route::post('/vendor/saran/store', [SaranController::class, 'store']);
+
+// Routing Cart
 Route::get('/carts', [ShopController::class, 'cart'])->name('cart')->middleware('auth');
 Route::get('add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('add.to.cart');
 Route::delete('remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
 
+//Routing untuk Succes setelah pembayaran
 Route::get('success', [ShopController::class, 'success']);
 
 
-
+// Auth Middleware
     Route::group(['middleware' => ['auth']], function() {
 
         // dashboard admin
@@ -64,44 +70,44 @@ Route::get('success', [ShopController::class, 'success']);
         Route::get('/admin/kartu/index', [KartuController::class, 'index']);
         Route::get('/admin/kartu/create', [KartuController::class, 'create']);
         Route::post('/admin/kartu/store', [KartuController::class, 'store']);
-    Route::get('/admin/kartu/delete/{id}', [KartuController::class, 'destroy']);
-    Route::get('/admin/kartu/edit/{id}', [KartuController::class, 'edit']);
-    Route::post('/admin/kartu/update/{id}', [KartuController::class, 'update']);
+        Route::get('/admin/kartu/delete/{id}', [KartuController::class, 'destroy']);
+        Route::get('/admin/kartu/edit/{id}', [KartuController::class, 'edit']);
+        Route::post('/admin/kartu/update/{id}', [KartuController::class, 'update']);
 
-    //Produk Route
-    Route::get('/admin/produk/index', [ProdukController::class, 'index']);
-    Route::get('/admin/produk/create', [ProdukController::class, 'create']);
-    Route::post('/admin/produk/store', [ProdukController::class, 'store']);
-    Route::get('/admin/produk/delete/{id}', [ProdukController::class, 'delete']);
-    Route::get('/admin/produk/edit/{id}', [ProdukController::class, 'edit']);
-    Route::post('/admin/produk/update/{id}', [ProdukController::class, 'update']);
-    
-    //User Route
-    Route::get('/admin/user/index', [UserController::class, 'index']);
-    Route::get('/admin/user/create', [UserController::class, 'create']);
-    Route::post('/admin/user/store', [UserController::class, 'store']);
-    Route::get('/admin/user/delete/{id}', [UserController::class, 'delete']);
-    Route::get('/admin/user/edit/{id}', [UserController::class, 'edit']);
-    Route::post('/admin/user/update/{id}', [UserController::class, 'update']);
-    
-    //Transaski Route
-    Route::get('/admin/transaksi/index', [TransaksiController::class, 'index']);
-    Route::get('/admin/transaksi/create', [TransaksiController::class, 'create']);
-    Route::post('/admin/transaksi/store', [TransaksiController::class, 'store']);
-    Route::get('/admin/transaksi/delete/{id}', [TransaksiController::class, 'delete']);
-    Route::get('/admin/transaksi/edit/{id}', [TransaksiController::class, 'edit']);
-    Route::put('/admin/transaksi/update/{id}', [TransaksiController::class, 'update']);
-    
-    // Detail Transaksi Route
-    Route::get('/admin/detail_transaksi/index', [DetailTransaksiController::class, 'index']);
-    Route::get('/admin/detail_transaksi/create', [DetailTransaksiController::class, 'create']);
-    Route::post('/admin/detail_transaksi/store', [DetailTransaksiController::class, 'store']);
-    Route::get('/admin/detail_transaksi/delet/{id}', [DetailTransaksiController::class, 'delete']);
-    Route::get('/admin/detail_transaksi/edit/{id}', [DetailTransaksiController::class, 'edit']);
-    Route::put('/admin/detail_transaksi/update/{id}', [DetailTransaksiController::class, 'update']);
+        //Produk Route
+        Route::get('/admin/produk/index', [ProdukController::class, 'index']);
+        Route::get('/admin/produk/create', [ProdukController::class, 'create']);
+        Route::post('/admin/produk/store', [ProdukController::class, 'store']);
+        Route::get('/admin/produk/delete/{id}', [ProdukController::class, 'delete']);
+        Route::get('/admin/produk/edit/{id}', [ProdukController::class, 'edit']);
+        Route::post('/admin/produk/update/{id}', [ProdukController::class, 'update']);
+        
+        //User Route
+        Route::get('/admin/user/index', [UserController::class, 'index']);
+        Route::get('/admin/user/create', [UserController::class, 'create']);
+        Route::post('/admin/user/store', [UserController::class, 'store']);
+        Route::get('/admin/user/delete/{id}', [UserController::class, 'delete']);
+        Route::get('/admin/user/edit/{id}', [UserController::class, 'edit']);
+        Route::post('/admin/user/update/{id}', [UserController::class, 'update']);
+        
+        //Transaski Route
+        Route::get('/admin/transaksi/index', [TransaksiController::class, 'index']);
+        Route::get('/admin/transaksi/create', [TransaksiController::class, 'create']);
+        Route::post('/admin/transaksi/store', [TransaksiController::class, 'store']);
+        Route::get('/admin/transaksi/delete/{id}', [TransaksiController::class, 'delete']);
+        Route::get('/admin/transaksi/edit/{id}', [TransaksiController::class, 'edit']);
+        Route::put('/admin/transaksi/update/{id}', [TransaksiController::class, 'update']);
+        
+        // Detail Transaksi Route
+        Route::get('/admin/detail_transaksi/index', [DetailTransaksiController::class, 'index']);
+        Route::get('/admin/detail_transaksi/create', [DetailTransaksiController::class, 'create']);
+        Route::post('/admin/detail_transaksi/store', [DetailTransaksiController::class, 'store']);
+        Route::get('/admin/detail_transaksi/delet/{id}', [DetailTransaksiController::class, 'delete']);
+        Route::get('/admin/detail_transaksi/edit/{id}', [DetailTransaksiController::class, 'edit']);
+        Route::put('/admin/detail_transaksi/update/{id}', [DetailTransaksiController::class, 'update']);
 
 
-    
+    // routing checkout
     Route::post('/checkout', [CoController::class, 'checkout'])->name('checkout');
 
 });
